@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Net.Sockets;
 using System.Net;
+using System.Net.Sockets;
+using System.Windows.Forms;
 
 namespace ConnectionTCPServer
 {
@@ -25,7 +18,7 @@ namespace ConnectionTCPServer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            IPAddress adresIP;
+            IPAddress adresIP=null;
             try
             {
                 adresIP = IPAddress.Parse(textBox1.Text);
@@ -43,7 +36,8 @@ namespace ConnectionTCPServer
                 serwer = new TcpListener(adresIP, port);
                 serwer.Start();
                 klient = serwer.AcceptTcpClient();
-                listBox1.Items.Add("Nawiązano połaczenie");
+                IPEndPoint IP = (IPEndPoint)klient.Client.RemoteEndPoint;
+                listBox1.Items.Add("["+IP.ToString()+"]:Nawiązano połaczenie");
                 button1.Enabled = false;
                 button2.Enabled = true;
                 klient.Close();
