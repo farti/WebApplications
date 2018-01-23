@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectionTCPClient", "Conn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectionTCPServer", "..\ConnectionTCPServer\ConnectionTCPServer.csproj", "{F2D98106-6376-4034-8932-F9987212E1F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDPClient", "UDPClient\UDPClient.csproj", "{C1903B60-AFA0-4CAB-8ED4-1F240EB00E6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDPServer", "UDPServer\UDPServer.csproj", "{68A7785A-C400-4FEF-94CB-81357AE98B23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{F2D98106-6376-4034-8932-F9987212E1F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2D98106-6376-4034-8932-F9987212E1F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2D98106-6376-4034-8932-F9987212E1F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1903B60-AFA0-4CAB-8ED4-1F240EB00E6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1903B60-AFA0-4CAB-8ED4-1F240EB00E6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1903B60-AFA0-4CAB-8ED4-1F240EB00E6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1903B60-AFA0-4CAB-8ED4-1F240EB00E6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68A7785A-C400-4FEF-94CB-81357AE98B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68A7785A-C400-4FEF-94CB-81357AE98B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68A7785A-C400-4FEF-94CB-81357AE98B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68A7785A-C400-4FEF-94CB-81357AE98B23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
