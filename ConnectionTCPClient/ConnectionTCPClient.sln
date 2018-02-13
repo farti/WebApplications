@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDPServer", "UDPServer\UDPS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncTCPServer", "..\AsyncTCPServer\AsyncTCPServer.csproj", "{91C6710B-F1E8-4BC7-BD59-91E50E33F07C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortScanner", "..\PortScanner\PortScanner.csproj", "{F73B358A-638F-4E9C-B4F1-BC58F1F89D7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalPortScanner", "LocalPortScanner\LocalPortScanner.csproj", "{56EBC1A3-0135-490C-8352-290B8BB85A4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "checkIP", "..\checkIP\checkIP.csproj", "{EA16BF07-148B-4F14-BB8B-83FAF4C7CFC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +45,18 @@ Global
 		{91C6710B-F1E8-4BC7-BD59-91E50E33F07C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91C6710B-F1E8-4BC7-BD59-91E50E33F07C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91C6710B-F1E8-4BC7-BD59-91E50E33F07C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F73B358A-638F-4E9C-B4F1-BC58F1F89D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F73B358A-638F-4E9C-B4F1-BC58F1F89D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F73B358A-638F-4E9C-B4F1-BC58F1F89D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F73B358A-638F-4E9C-B4F1-BC58F1F89D7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56EBC1A3-0135-490C-8352-290B8BB85A4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56EBC1A3-0135-490C-8352-290B8BB85A4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56EBC1A3-0135-490C-8352-290B8BB85A4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56EBC1A3-0135-490C-8352-290B8BB85A4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA16BF07-148B-4F14-BB8B-83FAF4C7CFC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA16BF07-148B-4F14-BB8B-83FAF4C7CFC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA16BF07-148B-4F14-BB8B-83FAF4C7CFC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA16BF07-148B-4F14-BB8B-83FAF4C7CFC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
