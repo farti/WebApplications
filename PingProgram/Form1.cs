@@ -18,27 +18,64 @@ namespace PingProgram
             InitializeComponent();
         }
 
-        private string WyslijPing(string adres, int timeout, byte[] bufor, PingOptions opcje)
+        //private string WyslijPing(string adres, int timeout, byte[] bufor, PingOptions opcje)
+        //{
+        //    Ping ping = new Ping();
+        //    try
+        //    {
+        //        PingReply odpowiedz = ping.Send(adres, timeout, bufor, opcje);
+        //        if (odpowiedz.Status == IPStatus.Success)
+
+        //            return "Odpowiedź z " + adres + " bajtów=" + odpowiedz.Buffer.Length + " czas=" + odpowiedz.RoundtripTime + "ms TTL=" + odpowiedz.Options.Ttl;
+        //        else
+        //            return "Błąd:" + adres + " " + odpowiedz.Status.ToString();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return "Błąd:" +adres + " " + ex.Message;
+        //    }
+        //} 
+
+
+        // teraz asynchronicznie:
+        public void WyslijPingAsynchronicznie(string adres, int timeout, byte[] bufor, PingOptions opcje)
         {
             Ping ping = new Ping();
+            ping.PingCompleted += new PingCompletedEventHandler(KoniecPing);
             try
             {
-                PingReply odpowiedz = ping.Send(adres, timeout, bufor, opcje);
-                if (odpowiedz.Status == IPStatus.Success)
-
-                    return "Odpowiedź z " + adres + " bajtów=" + odpowiedz.Buffer.Length + " czas=" + odpowiedz.RoundtripTime + "ms TTL=" + odpowiedz.Options.Ttl;
-                else
-                    return "Błąd:" + adres + " " + odpowiedz.Status.ToString();
+                ping.SendAsync(adres, timeout, bufor, opcje, null);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                return "Błąd:" +adres + " " + ex.Message;
+                listBox1.Items.Add("Błąd: " + adres + " " + ex.Message);
             }
         }
+        public void KoniecPing(object sender, PingCompletedEventArgs e)
+        {
+            if (e.Cancelled || e.Error != null)
+            {
+                listBox1.Items.Add("Błąd: Operacja ptrzerwana bądź nieprawisłowy adres ");
+                ((IDisposable)(Ping)sender).Dispose();
+                return;
+            }
+            PingReply odpowiedz = e.Reply;
+            if (odpowiedz.Status == IPStatus.Success)
+            {
+                listBox1.Items.Add("Odpowiedź z " + odpowiedz.Address.ToString() + " bajtów=" + odpowiedz.Buffer.Length + " ms TTL=" + odpowiedz.Options.Ttl);
 
-        
+            }
+            else
+            {
+                listBox1.Items.Add("Błąd: Brak odpowiedzi z " + e.Reply.Address + " : " + odpowiedz.Status);
+            }
+            ((IDisposable)(Ping)sender).Dispose();
+        }
 
-
+        private void Ping_PingCompleted(object sender, PingCompletedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -81,7 +118,7 @@ namespace PingProgram
                 {
                     for (int i = 0; i < (int)numericUpDown1.Value; i++)
                     {
-                        listBox1.Items.Add(this.WyslijPing(textBox1.Text, timeout, bufor, opcje));
+                        WyslijPingAsynchronicznie(textBox1.Text, timeout, bufor, opcje);
                     }
                     listBox1.Items.Add("--------------------");
                 }
@@ -91,7 +128,7 @@ namespace PingProgram
                     {
                         for (int i = 0; i < (int)numericUpDown1.Value; i++)
                         {
-                            listBox1.Items.Add(this.WyslijPing(host, timeout, bufor, opcje));
+                            WyslijPingAsynchronicznie(host, timeout, bufor, opcje);
                         }
                         listBox1.Items.Add("----------------------");
                     }
