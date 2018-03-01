@@ -98,7 +98,11 @@ namespace Email
             try
             {
                 klient = new SmtpClient(textBoxAdres.Text);
-                klient.Credentials = CredentialCache.DefaultNetworkCredentials;
+                if (textBoxUser.Text!=string.Empty && textBoxPass.Text != string.Empty)
+                {
+                    klient.Credentials = new NetworkCredential(textBoxUser.Text, textBoxPass.Text);
+                }
+
                 klient.Send(wiadomosc);
                 listBox1.Items.Add("Wiadomość zostala wysłana");
             }

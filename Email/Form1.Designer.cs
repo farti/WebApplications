@@ -51,6 +51,10 @@
             this.textBoxBc = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.buttonCzysc = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxUser = new System.Windows.Forms.TextBox();
+            this.textBoxPass = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -67,7 +71,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(13, 26);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(314, 124);
+            this.groupBox1.Size = new System.Drawing.Size(314, 181);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Nagłówek";
@@ -122,12 +126,16 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.textBoxPass);
+            this.groupBox2.Controls.Add(this.textBoxUser);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.listBox1);
             this.groupBox2.Controls.Add(this.textBoxAdres);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Location = new System.Drawing.Point(334, 26);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(244, 124);
+            this.groupBox2.Size = new System.Drawing.Size(244, 181);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Serwer";
@@ -160,7 +168,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 166);
+            this.label5.Location = new System.Drawing.Point(13, 222);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 2;
@@ -168,17 +176,17 @@
             // 
             // textBoxTemat
             // 
-            this.textBoxTemat.Location = new System.Drawing.Point(60, 166);
+            this.textBoxTemat.Location = new System.Drawing.Point(60, 222);
             this.textBoxTemat.Name = "textBoxTemat";
             this.textBoxTemat.Size = new System.Drawing.Size(511, 20);
             this.textBoxTemat.TabIndex = 3;
             // 
             // textBoxList
             // 
-            this.textBoxList.Location = new System.Drawing.Point(16, 192);
+            this.textBoxList.Location = new System.Drawing.Point(16, 248);
             this.textBoxList.Multiline = true;
             this.textBoxList.Name = "textBoxList";
-            this.textBoxList.Size = new System.Drawing.Size(555, 203);
+            this.textBoxList.Size = new System.Drawing.Size(555, 147);
             this.textBoxList.TabIndex = 4;
             // 
             // button1
@@ -259,11 +267,44 @@
             this.buttonCzysc.UseVisualStyleBackColor = true;
             this.buttonCzysc.Click += new System.EventHandler(this.buttonCzysc_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(19, 128);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(36, 13);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Login:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(19, 155);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(39, 13);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "Hasło:";
+            // 
+            // textBoxUser
+            // 
+            this.textBoxUser.Location = new System.Drawing.Point(60, 125);
+            this.textBoxUser.Name = "textBoxUser";
+            this.textBoxUser.Size = new System.Drawing.Size(134, 20);
+            this.textBoxUser.TabIndex = 14;
+            // 
+            // textBoxPass
+            // 
+            this.textBoxPass.Location = new System.Drawing.Point(60, 152);
+            this.textBoxPass.Name = "textBoxPass";
+            this.textBoxPass.PasswordChar = '#';
+            this.textBoxPass.Size = new System.Drawing.Size(134, 20);
+            this.textBoxPass.TabIndex = 15;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(589, 524);
+            this.ClientSize = new System.Drawing.Size(589, 523);
             this.Controls.Add(this.buttonCzysc);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button2);
@@ -311,6 +352,10 @@
         private System.Windows.Forms.TextBox textBoxBc;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttonCzysc;
+        private System.Windows.Forms.TextBox textBoxPass;
+        private System.Windows.Forms.TextBox textBoxUser;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
     }
 }
 
