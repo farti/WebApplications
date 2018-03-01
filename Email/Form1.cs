@@ -17,6 +17,7 @@ namespace Email
             MailAddress Od;
             MailAddress Do;
             MailAddress Cc = null;
+            MailAddress Bc = null; ;
             SmtpClient klient = null;
             try
             {
@@ -25,7 +26,8 @@ namespace Email
             catch
             {
                 MessageBox.Show("Nieprawidłowy adres e-mail nadawcy");
-                textBoxOd.Text = String.Empty;
+                textBoxOd.Focus();
+                textBoxOd.SelectAll();
                 return;
             }
             try
@@ -35,8 +37,9 @@ namespace Email
             catch
             {
                 MessageBox.Show("Nieprawidłowy adres e-mail odbiorcy");
-                textBoxDo.Text = String.Empty;
-                return;
+                textBoxOd.Focus();
+                textBoxDo.SelectAll();
+                    return;
             }
             if (textBoxCc.Text != string.Empty)
             {
@@ -47,15 +50,51 @@ namespace Email
                 catch
                 {
                     MessageBox.Show("Nieprawidłowy adres e-mail odbiorców");
-                    textBoxCc.Text = String.Empty;
+                    textBoxOd.Focus();
+                    textBoxCc.SelectAll();
                     return;
                 }
             }
+            if (textBoxBc.Text != string.Empty)
+            {
+                if (textBoxBc.Text.Trim().Length>0)
+
+                {
+                    try
+                    {
+                        Bc = new MailAddress(textBoxBc.Text);
+                    }
+                    catch 
+                    {
+                        MessageBox.Show("Nieprawidłowy adres e-mail odbiorców ukrytych");
+                        textBoxOd.Focus();
+                        textBoxBc.SelectAll();
+                        return;
+                    }
+                }
+            }
+
+
             MailMessage wiadomosc = new MailMessage(Od, Do);
             wiadomosc.Subject = textBoxTemat.Text;
             wiadomosc.Body = textBoxList.Text;
             if (Cc != null)
                 wiadomosc.CC.Add(Cc);
+            if (Bc != null)
+                wiadomosc.Bcc.Add(Bc);
+            if (listBox2.Items.Count>0)
+            {
+                foreach (string plik in listBox2.Items)
+                {
+                    Attachment zalacznik = new Attachment(plik);
+                    wiadomosc.Attachments.Add(zalacznik);
+                }
+            }
+            wiadomosc.IsBodyHtml = checkBox1.Checked;
+
+
+
+
             try
             {
                 klient = new SmtpClient(textBoxAdres.Text);
@@ -68,6 +107,24 @@ namespace Email
                 listBox1.Items.Add("Brak połaczenia z serwerem : " + ex.Message);
             }
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog()==DialogResult.OK)
+            {
+                listBox2.Items.Add(openFileDialog1);
+            }
+        }
+
+        private void buttonCzysc_Click(object sender, EventArgs e)
+        {
+            textBoxOd.Clear();
+            textBoxDo.Clear();
+            textBoxCc.Clear();
+            textBoxBc.Clear();
+            textBoxTemat.Clear();
+            textBoxList.Clear();
         }
     }
 }
