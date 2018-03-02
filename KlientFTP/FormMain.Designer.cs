@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxServer = new System.Windows.Forms.ComboBox();
             this.groupBoxSerwer = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBoxLogin = new System.Windows.Forms.TextBox();
-            this.textBoxPass = new System.Windows.Forms.TextBox();
-            this.buttonConnect = new System.Windows.Forms.Button();
             this.buttonDisconnect = new System.Windows.Forms.Button();
+            this.buttonConnect = new System.Windows.Forms.Button();
+            this.textBoxPass = new System.Windows.Forms.TextBox();
+            this.textBoxLogin = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonDownload = new System.Windows.Forms.Button();
             this.buttonSend = new System.Windows.Forms.Button();
+            this.buttonDownload = new System.Windows.Forms.Button();
             this.textBoxFtpDir = new System.Windows.Forms.TextBox();
             this.textBoxLocalPath = new System.Windows.Forms.TextBox();
             this.buttonBrowser = new System.Windows.Forms.Button();
@@ -53,13 +53,13 @@
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // comboBoxServer
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(6, 19);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(188, 21);
-            this.comboBox1.TabIndex = 0;
+            this.comboBoxServer.FormattingEnabled = true;
+            this.comboBoxServer.Location = new System.Drawing.Point(6, 19);
+            this.comboBoxServer.Name = "comboBoxServer";
+            this.comboBoxServer.Size = new System.Drawing.Size(188, 21);
+            this.comboBoxServer.TabIndex = 0;
             // 
             // groupBoxSerwer
             // 
@@ -69,7 +69,7 @@
             this.groupBoxSerwer.Controls.Add(this.textBoxLogin);
             this.groupBoxSerwer.Controls.Add(this.label2);
             this.groupBoxSerwer.Controls.Add(this.label1);
-            this.groupBoxSerwer.Controls.Add(this.comboBox1);
+            this.groupBoxSerwer.Controls.Add(this.comboBoxServer);
             this.groupBoxSerwer.Location = new System.Drawing.Point(12, 12);
             this.groupBoxSerwer.Name = "groupBoxSerwer";
             this.groupBoxSerwer.Size = new System.Drawing.Size(200, 149);
@@ -77,14 +77,39 @@
             this.groupBoxSerwer.TabStop = false;
             this.groupBoxSerwer.Text = "Serwer FTP";
             // 
-            // label1
+            // buttonDisconnect
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 57);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Login:";
+            this.buttonDisconnect.Location = new System.Drawing.Point(118, 118);
+            this.buttonDisconnect.Name = "buttonDisconnect";
+            this.buttonDisconnect.Size = new System.Drawing.Size(75, 23);
+            this.buttonDisconnect.TabIndex = 6;
+            this.buttonDisconnect.Text = "Rozłącz";
+            this.buttonDisconnect.UseVisualStyleBackColor = true;
+            // 
+            // buttonConnect
+            // 
+            this.buttonConnect.Location = new System.Drawing.Point(6, 118);
+            this.buttonConnect.Name = "buttonConnect";
+            this.buttonConnect.Size = new System.Drawing.Size(75, 23);
+            this.buttonConnect.TabIndex = 5;
+            this.buttonConnect.Text = "Połącz";
+            this.buttonConnect.UseVisualStyleBackColor = true;
+            this.buttonConnect.Click += new System.EventHandler(this.buttonConnect_Click);
+            // 
+            // textBoxPass
+            // 
+            this.textBoxPass.Location = new System.Drawing.Point(62, 81);
+            this.textBoxPass.Name = "textBoxPass";
+            this.textBoxPass.PasswordChar = '#';
+            this.textBoxPass.Size = new System.Drawing.Size(132, 20);
+            this.textBoxPass.TabIndex = 4;
+            // 
+            // textBoxLogin
+            // 
+            this.textBoxLogin.Location = new System.Drawing.Point(62, 54);
+            this.textBoxLogin.Name = "textBoxLogin";
+            this.textBoxLogin.Size = new System.Drawing.Size(132, 20);
+            this.textBoxLogin.TabIndex = 3;
             // 
             // label2
             // 
@@ -95,38 +120,14 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Password:";
             // 
-            // textBoxLogin
+            // label1
             // 
-            this.textBoxLogin.Location = new System.Drawing.Point(62, 54);
-            this.textBoxLogin.Name = "textBoxLogin";
-            this.textBoxLogin.Size = new System.Drawing.Size(132, 20);
-            this.textBoxLogin.TabIndex = 3;
-            // 
-            // textBoxPass
-            // 
-            this.textBoxPass.Location = new System.Drawing.Point(62, 81);
-            this.textBoxPass.Name = "textBoxPass";
-            this.textBoxPass.PasswordChar = '#';
-            this.textBoxPass.Size = new System.Drawing.Size(132, 20);
-            this.textBoxPass.TabIndex = 4;
-            // 
-            // buttonConnect
-            // 
-            this.buttonConnect.Location = new System.Drawing.Point(6, 118);
-            this.buttonConnect.Name = "buttonConnect";
-            this.buttonConnect.Size = new System.Drawing.Size(75, 23);
-            this.buttonConnect.TabIndex = 5;
-            this.buttonConnect.Text = "Połącz";
-            this.buttonConnect.UseVisualStyleBackColor = true;
-            // 
-            // buttonDisconnect
-            // 
-            this.buttonDisconnect.Location = new System.Drawing.Point(118, 118);
-            this.buttonDisconnect.Name = "buttonDisconnect";
-            this.buttonDisconnect.Size = new System.Drawing.Size(75, 23);
-            this.buttonDisconnect.TabIndex = 6;
-            this.buttonDisconnect.Text = "Rozłącz";
-            this.buttonDisconnect.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 57);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(36, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Login:";
             // 
             // groupBox1
             // 
@@ -139,15 +140,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Opcje";
             // 
-            // buttonDownload
-            // 
-            this.buttonDownload.Location = new System.Drawing.Point(62, 19);
-            this.buttonDownload.Name = "buttonDownload";
-            this.buttonDownload.Size = new System.Drawing.Size(75, 23);
-            this.buttonDownload.TabIndex = 0;
-            this.buttonDownload.Text = "Pobierz";
-            this.buttonDownload.UseVisualStyleBackColor = true;
-            // 
             // buttonSend
             // 
             this.buttonSend.Location = new System.Drawing.Point(62, 58);
@@ -156,6 +148,16 @@
             this.buttonSend.TabIndex = 1;
             this.buttonSend.Text = "Wyślij";
             this.buttonSend.UseVisualStyleBackColor = true;
+            // 
+            // buttonDownload
+            // 
+            this.buttonDownload.Location = new System.Drawing.Point(62, 19);
+            this.buttonDownload.Name = "buttonDownload";
+            this.buttonDownload.Size = new System.Drawing.Size(75, 23);
+            this.buttonDownload.TabIndex = 0;
+            this.buttonDownload.Text = "Pobierz";
+            this.buttonDownload.UseVisualStyleBackColor = true;
+            this.buttonDownload.Click += new System.EventHandler(this.buttonDownload_Click);
             // 
             // textBoxFtpDir
             // 
@@ -183,12 +185,13 @@
             // 
             // buttonUpDir
             // 
-            this.buttonUpDir.Location = new System.Drawing.Point(555, 31);
+            this.buttonUpDir.Location = new System.Drawing.Point(555, 29);
             this.buttonUpDir.Name = "buttonUpDir";
             this.buttonUpDir.Size = new System.Drawing.Size(43, 23);
             this.buttonUpDir.TabIndex = 6;
             this.buttonUpDir.Text = "^";
             this.buttonUpDir.UseVisualStyleBackColor = true;
+            this.buttonUpDir.Click += new System.EventHandler(this.buttonUpDir_Click);
             // 
             // listBoxFtpDir
             // 
@@ -197,6 +200,8 @@
             this.listBoxFtpDir.Name = "listBoxFtpDir";
             this.listBoxFtpDir.Size = new System.Drawing.Size(330, 199);
             this.listBoxFtpDir.TabIndex = 7;
+            this.listBoxFtpDir.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxFtpDir_KeyDown);
+            this.listBoxFtpDir.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxFtpDir_MouseDoubleClick);
             // 
             // openFileDialog1
             // 
@@ -246,7 +251,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxServer;
         private System.Windows.Forms.GroupBox groupBoxSerwer;
         private System.Windows.Forms.Button buttonDisconnect;
         private System.Windows.Forms.Button buttonConnect;
