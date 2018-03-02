@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,6 +71,8 @@ namespace KlientFTP
                         serverName = serverName.Replace("ftp://", "");
 
                     client = new FtpClient(serverName, textBoxLogin.Text, textBoxPass.Text);
+                    client.DownProgressChanged += new FtpClient.DownProgressChangeEventHandler(Client_DownProgressChanged);
+                    client.DownCompleted += new FtpClient.DownCompletedEventHandler(Client_DownCompleted);
                     GetFtpContent(client.GetDirectories());
                     textBoxFtpDir.Text = client.FtpDirectory;
                     toolStripStatusLabelServer.Text = "Serwer: ftp://" + client.Host;
@@ -91,9 +94,55 @@ namespace KlientFTP
             
         }
 
+        private void Client_DownCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.Cancelled || e.Error!= null)
+            {
+                MessageBox.Show("Bład: " + e.Error.Message);
+            }
+            else
+            {
+                MessageBox.Show("Plik pobrany");
+            }
+            client.DownloadCompleted = true;
+            buttonDownload.Enabled = true;
+            buttonSend.Enabled = true;
+        }
+
+        private void Client_DownProgressChanged(object sender, System.Net.DownloadProgressChangedEventArgs e)
+        {
+            toolStripStatusLabelDownload.Text = "Pobrano: " + (e.BytesReceived / (double)1024).ToString() + " kB";
+        }
+
+
         private void buttonDownload_Click(object sender, EventArgs e)
         {
-
+            int index = listBoxFtpDir.SelectedIndex;
+            if (listBoxFtpDir.Items[index].ToString()[0]!='[')
+            {
+                if (MessageBox.Show("Czy pobrać plik ?","Pobieranie pliku" , MessageBoxButtons.OKCancel,MessageBoxIcon.Question)==DialogResult.OK)
+                {
+                    try
+                    {
+                        string localFile = textBoxLocalPath.Text + "\\" + listBoxFtpDir.Items[index].ToString();
+                        FileInfo fi = new FileInfo(localFile);
+                        if (fi.Exists==false)
+                        {
+                            client.DownloadFileAsync(listBoxFtpDir.Items[index].ToString(), localFile);
+                            buttonDownload.Enabled = false;
+                            buttonSend.Enabled = false;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Plik istnieje");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                       MessageBox.Show(ex.Message, "Błąd");
+                    }
+                }
+            }
         }
 
         private void listBoxFtpDir_MouseDoubleClick(object sender, MouseEventArgs e)

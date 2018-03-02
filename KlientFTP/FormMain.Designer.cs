@@ -48,6 +48,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelServer = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelDownload = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBoxSerwer.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -210,7 +211,8 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabelServer});
+            this.toolStripStatusLabelServer,
+            this.toolStripStatusLabelDownload});
             this.statusStrip1.Location = new System.Drawing.Point(0, 307);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(602, 22);
@@ -222,6 +224,12 @@
             this.toolStripStatusLabelServer.Name = "toolStripStatusLabelServer";
             this.toolStripStatusLabelServer.Size = new System.Drawing.Size(42, 17);
             this.toolStripStatusLabelServer.Text = "Serwer";
+            // 
+            // toolStripStatusLabelDownload
+            // 
+            this.toolStripStatusLabelDownload.Name = "toolStripStatusLabelDownload";
+            this.toolStripStatusLabelDownload.Size = new System.Drawing.Size(52, 17);
+            this.toolStripStatusLabelDownload.Text = "Pobrano";
             // 
             // FormMain
             // 
@@ -271,6 +279,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelServer;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelDownload;
     }
 }
 

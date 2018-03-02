@@ -168,6 +168,8 @@ namespace KlientFTP
         {
             this.OnDownloadCompleted(sender, e);
         }
+
+
         #region Zdarzenia
         public delegate void DownProgressChangeEventHandler(object sender, DownloadProgressChangedEventArgs e);  // deklaracja delegecji
         public event DownProgressChangeEventHandler DownProgressChanged;                                          // tworzymy zdarzenie event
@@ -189,8 +191,61 @@ namespace KlientFTP
                 DownCompleted(sender, e);
             }
         }
+        //Definicja zdarzenia związanego z zakończeniem wysyłania pliku na serwer FTP
+        public delegate void UpCompletedEventHandler(object sender, UploadFileCompletedEventArgs e);
+        public event UpCompletedEventHandler UpCompleted;
+        protected virtual void OnUploadCompleted(object sender, UploadFileCompletedEventArgs e)
+        {
+            if (UpCompleted!= null )
+            {
+                UpCompleted(sender, e);
+            }
+        }
 
+        //Utworzenie nowego zdarzenia UploadProgressChangedEventHandler
+        public delegate void UpProgressChangedEventHandler(object sender, UploadProgressChangedEventArgs e);
+        public event UpProgressChangedEventHandler UpProgressChanged;
+        protected virtual void OnUploadProgressChanged(object sender, UploadProgressChangedEventArgs e)
+        {
+            if (UpProgressChanged!= null)
+            {
+                UpProgressChanged(sender, e);
+            }
+        }
 
         #endregion
+
+        // Metoda wysyłająca asynchronicznie plik na serwer FTP
+        public void UploadFileAsync(string FileName)
+        {
+            try
+            {
+                System.Net.Cache.RequestCachePolicy cache = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.Reload);
+                WebClient client = new WebClient();
+                FileInfo file = new FileInfo(FileName);
+                Uri uri = new Uri((ftpDirectory + '/' + file.Name).ToString());
+                client.Credentials = new NetworkCredential(this.userName, this.password);
+                uploadCompleted = false;
+                if (file.Exists)
+                {
+                    client.UploadFileCompleted += new UploadFileCompletedEventHandler(Client_UploadFileCompleted);
+                    client.UploadProgressChanged += new UploadProgressChangedEventHandler(Client_UploadProgressChanged);
+                }
+            }
+            catch
+            {
+                throw new Exception("Błąd: Nie można wysłać pliku");
+            }
+        }
+
+        private void Client_UploadProgressChanged(object sender, UploadProgressChangedEventArgs e)
+        {
+            this.OnUploadProgressChanged(sender, e);
+        }
+
+        private void Client_UploadFileCompleted(object sender, UploadFileCompletedEventArgs e)
+        {
+            this.OnUploadCompleted(sender, e);
+        }
     }
 }
