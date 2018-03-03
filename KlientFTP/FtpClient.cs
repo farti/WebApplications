@@ -56,8 +56,8 @@ namespace KlientFTP
         }
         public bool UploadCompleted
         {
-            get { return downloadCompleted; }
-            set { downloadCompleted = value; }
+            get { return uploadCompleted; }
+            set { uploadCompleted = value; }
         }
         #endregion
 
@@ -73,7 +73,7 @@ namespace KlientFTP
             this.host = host;
             this.userName = userName;
             this.password = password;
-            ftpDirectory = "ftp:/" + this.host;
+            ftpDirectory = "ftp://" + this.host;
         }
 
         // metoda zwracająca liste plików i katalogów z serwera FTP
@@ -247,5 +247,26 @@ namespace KlientFTP
         {
             this.OnUploadCompleted(sender, e);
         }
+
+        //Metoda kasująca plik z zasobów FTP
+        public string DeleteFile(string nazwa)
+        {
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpDirectory + "//" + nazwa);
+                request.Method = WebRequestMethods.Ftp.DeleteFile;
+                request.Credentials = new NetworkCredential(this.userName, this.password);
+                request.KeepAlive = false;
+                request.UsePassive = true;
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                Stream stream = response.GetResponseStream();
+                return response.StatusDescription;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Błąd: Nie można usunąć pliku " + nazwa + " (" + ex.Message + ")");
+            }
+        }
     }
+
 }

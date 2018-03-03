@@ -73,6 +73,8 @@ namespace KlientFTP
                     client = new FtpClient(serverName, textBoxLogin.Text, textBoxPass.Text);
                     client.DownProgressChanged += new FtpClient.DownProgressChangeEventHandler(Client_DownProgressChanged);
                     client.DownCompleted += new FtpClient.DownCompletedEventHandler(Client_DownCompleted);
+                    client.UpCompleted += new FtpClient.UpCompletedEventHandler(Client_UpCompleted);
+                    client.UpProgressChanged += new FtpClient.UpProgressChangedEventHandler(Client_UpProgressChanged);
                     GetFtpContent(client.GetDirectories());
                     textBoxFtpDir.Text = client.FtpDirectory;
                     toolStripStatusLabelServer.Text = "Serwer: ftp://" + client.Host;
@@ -93,6 +95,37 @@ namespace KlientFTP
             }
             
         }
+
+        private void Client_UpProgressChanged(object sender, System.Net.UploadProgressChangedEventArgs e)
+        {
+            toolStripStatusLabelDownload.Text = "Wysłano: " + (e.BytesSent / (double)1024).ToString() + " kB";
+        }
+
+        private void Client_UpCompleted(object sender, System.Net.UploadFileCompletedEventArgs e)
+        {
+            if (e.Cancelled || e.Error != null)
+            {
+                MessageBox.Show("Błąd: " + e.Error.Message);
+                client.UploadCompleted = true;
+                buttonSend.Enabled = true;
+                buttonDownload.Enabled = true;
+                return;
+            }
+            client.UploadCompleted = true;
+            buttonSend.Enabled = true;
+            buttonDownload.Enabled = true;
+            MessageBox.Show("Wysłano plik");
+            try
+            {
+                GetFtpContent(client.GetDirectories());
+            }
+            catch ( Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd");
+            }
+        }
+
+        
 
         private void Client_DownCompleted(object sender, AsyncCompletedEventArgs e)
         {
@@ -200,8 +233,56 @@ namespace KlientFTP
             }
         }
 
+        private void buttonSend_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog()==DialogResult.OK)
+            {
+                try
+                {
+                    client.UploadFileAsync(openFileDialog1.FileName);
+                    buttonDownload.Enabled = false;
+                    buttonSend.Enabled = false;
+                }
+                catch (Exception ex)
+                {
+                    {
+                        MessageBox.Show(ex.Message, "Błąd");
+                    }
+                }
+            }
+        }
 
+        private void FormMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode==Keys.F8)
+            {
+                int indeks = listBoxFtpDir.SelectedIndex;
+                if (indeks>-1)
+                {
+                    if (listBoxFtpDir.Items[indeks].ToString([0]!= '[')
+                    {
+                        try
+                        {
+                            MessageBox.Show(client.DeleteFile(listBoxFtpDir.Items[indeks].ToString()));
+                            GetFtpContent(client.GetDirectories());
+                        } catch( Exception ex)
+                        {
+                            MessageBox.Show("Nie można usunąć pliku" + " (" + ex.Message + ")");
+                        }
+                    }
+                }
+            }
+        }
 
-
+        private void buttonDisconnect_Click(object sender, EventArgs e)
+        {
+            client.DownProgressChanged -= new FtpClient.DownProgressChangeEventHandler(Client_DownProgressChanged);
+            client.DownCompleted -= new FtpClient.DownCompletedEventHandler(Client_DownCompleted);
+            client.UpCompleted -= new FtpClient.UpCompletedEventHandler(Client_UpCompleted);
+            client.UpProgressChanged -= new FtpClient.UpProgressChangedEventHandler(Client_UpProgressChanged);
+            buttonConnect.Enabled = true;
+            listBoxFtpDir.Items.Clear();
+            textBoxFtpDir.Text = "";
+        }
     }
 }

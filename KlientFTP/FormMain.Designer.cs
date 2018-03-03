@@ -86,6 +86,7 @@
             this.buttonDisconnect.TabIndex = 6;
             this.buttonDisconnect.Text = "Rozłącz";
             this.buttonDisconnect.UseVisualStyleBackColor = true;
+            this.buttonDisconnect.Click += new System.EventHandler(this.buttonDisconnect_Click);
             // 
             // buttonConnect
             // 
@@ -101,7 +102,7 @@
             // 
             this.textBoxPass.Location = new System.Drawing.Point(62, 81);
             this.textBoxPass.Name = "textBoxPass";
-            this.textBoxPass.PasswordChar = '#';
+            this.textBoxPass.PasswordChar = '*';
             this.textBoxPass.Size = new System.Drawing.Size(132, 20);
             this.textBoxPass.TabIndex = 4;
             // 
@@ -149,6 +150,7 @@
             this.buttonSend.TabIndex = 1;
             this.buttonSend.Text = "Wyślij";
             this.buttonSend.UseVisualStyleBackColor = true;
+            this.buttonSend.Click += new System.EventHandler(this.buttonSend_Click);
             // 
             // buttonDownload
             // 
@@ -245,8 +247,10 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBoxSerwer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.KeyPreview = true;
             this.Name = "FormMain";
             this.Text = "Klient FTP";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.groupBoxSerwer.ResumeLayout(false);
             this.groupBoxSerwer.PerformLayout();
             this.groupBox1.ResumeLayout(false);
