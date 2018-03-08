@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Drawing.Imaging;
-using System.Net.Sockets;
-using System.Net;
 using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Windows.Forms;
 
 namespace ZdalnyScreenshotKlient
 {
@@ -30,6 +26,7 @@ namespace ZdalnyScreenshotKlient
         private string adresLokalnyIP;
         private Bitmap obraz;
 
+        //Metoda wykonująca zrzut ekranu
         private Bitmap wykonajScreenshot()
         {
             Bitmap bitmapa = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb);
@@ -38,8 +35,9 @@ namespace ZdalnyScreenshotKlient
             return bitmapa;
         }
 
+        //Bezpieczne odwoływanie się z innego wątku do własności kontrolek
         delegate void SetTextCallBack(string tekst);
-            private void SetText(string tekst)
+        private void SetText(string tekst)
         {
             if (listBox1.InvokeRequired)
             {
@@ -66,7 +64,7 @@ namespace ZdalnyScreenshotKlient
                 int odczyt = ns.Read(bufor, 0, bufor.Length);
                 String s = Encoding.ASCII.GetString(bufor);
                 string wiadomosc = Encoding.ASCII.GetString(bufor);
-                if (wiadomosc=="##S##")
+                if (wiadomosc == "##S##")
                 {
                     this.SetText("Zrzut ekranu w trakcie wykonywania...");
                     obraz = wykonajScreenshot();
@@ -79,13 +77,14 @@ namespace ZdalnyScreenshotKlient
                         TcpClient klient2 = new TcpClient(serwerDanychIP.ToString(), serwerDanychport);
                         NetworkStream ns2 = klient2.GetStream();
                         this.SetText("Wysyłanie zrzutu...");
-                        using(BinaryWriter bw = new BinaryWriter(ns2))
+                        using (BinaryWriter bw = new BinaryWriter(ns2))
                         {
                             bw.Write((int)obrazByte.Length);
                             bw.Write(obrazByte);
                         }
                         this.SetText("Zrzut ekranu przesłany.");
-                    }catch (Exception ex)
+                    }
+                    catch
                     {
                         this.SetText("Nie mozna połączyć z serwerem");
                     }
@@ -110,7 +109,7 @@ namespace ZdalnyScreenshotKlient
         {
             WyslijWiadomoscUDP(adresLokalnyIP + ":BYE");
         }
-        
+
 
 
 

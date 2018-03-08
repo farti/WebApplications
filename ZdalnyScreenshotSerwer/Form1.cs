@@ -36,6 +36,7 @@ namespace ZdalnyScreenshotSerwer
         }
 
         delegate void RemoveTextCallBack(int pozycja);
+        //Metoda pozwalająca bezpiecznie usunąć wpis z listy listBox1
         private void RemoveText(int pozycja)
         {
             if (listBox1.InvokeRequired)
@@ -47,7 +48,7 @@ namespace ZdalnyScreenshotSerwer
                 listBox1.Items.RemoveAt(pozycja);
             }
         }
-
+        //Oczekiwanie na pakiety UDP
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
             IPEndPoint zdalnyIP = new IPEndPoint(IPAddress.Any, 0);
